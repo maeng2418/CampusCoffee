@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp">
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="가게 소개"
+    android:textSize="20dp"
+    android:textStyle="bold"
+    android:layout_marginVertical="10dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="안녕하세요. 제 1학생회관 카페입니다. 저희는 항상 최고의 재료로 최상의 맛을 구현하고 있으며 앞으로 늘 겸손하고 정성스럽게 고객님들께 다가가겠습니다. 맛있게 드시고 건강하세요. 감사합니다."
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="안내 및 혜택"
+    android:textSize="20dp"
+    android:textStyle="bold"
+    android:layout_marginVertical="10dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="매장 방문시 테이크아웃 이벤트할인 진행중.\n아메리카노  R 1500원. XL 2000원.\n카페라떼  R 2000원. XL 3500원\n딸기라떼  R 1500원. XL 2000원"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="영업정보"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginVertical="10dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="운영시간   매일 - 오전 10:50 ~ 오후 10:00\n휴무일       연중무휴"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"/>
+</LinearLayout>
