@@ -18,6 +18,6 @@ public class LoadingActivity extends Activity {
             public void run() {
                 finish();
             }
-        }, 4000);
+        }, 2000);
     }
 }

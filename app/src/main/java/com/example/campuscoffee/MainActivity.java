@@ -20,14 +20,14 @@ import android.widget.ViewFlipper;
 public class MainActivity extends BaseActivity {
 
     private ViewFlipper flipper;
-    Button btn1;
+    //Button btn1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
         initLayout();
-        btn1 = (Button) findViewById(R.id.no1);
+        //btn1 = (Button) findViewById(R.id.no1);
 
         flipper=(ViewFlipper)findViewById(R.id.viewFlipper);
 
@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        btn1.setOnClickListener(new Button.OnClickListener(){
+        /*btn1.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SubActivity.class);
@@ -61,6 +61,27 @@ public class MainActivity extends BaseActivity {
                 //finish();
             }
         });
+        */
+    }
+
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.no1:
+                SubActivity.store = 1;
+                break;
+            case R.id.no2:
+                SubActivity.store = 2;
+                break;
+            case R.id.no3:
+                SubActivity.store = 3;
+                break;
+            case R.id.no4:
+                SubActivity.store = 4;
+                break;
+
+        }
+        Intent intent = new Intent(getApplicationContext(), SubActivity.class);
+        startActivity(intent);
     }
 
     @Override

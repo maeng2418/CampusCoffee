@@ -9,6 +9,8 @@ import android.widget.Button;
 
 public class SubActivity extends BaseActivity {
 
+    public static int store;
+
     Fragment1 fragment1;
     Fragment2 fragment2;
     Fragment3 fragment3;
@@ -18,10 +20,11 @@ public class SubActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, LoadingActivity.class);
-        startActivity(intent);
         setContentView(getLayoutResource());
         initLayout();
+
+        Intent intent = new Intent(this, LoadingActivity.class);
+        startActivity(intent);
 
         // 프래그먼트를 보여주기
         fragment1 = new Fragment1();
@@ -81,7 +84,20 @@ public class SubActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_sub1;
+
+        switch (store){
+            case 1:
+                return R.layout.activity_sub1;
+            case 2:
+                return R.layout.activity_sub2;
+            case 3:
+                return R.layout.activity_sub3;
+            case 4:
+                return R.layout.activity_sub4;
+            default:
+                return 0;
+        }
+
     }
 }
 

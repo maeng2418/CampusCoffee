@@ -14,15 +14,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/header"
         android:id="@+id/scroll">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/cartTitle"
                 android:textSize="30dp"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
                 android:text="장바구니"
                 android:textStyle="bold"/>
             <LinearLayout
@@ -30,80 +31,94 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/colorAccent"
-                android:layout_below="@id/cartTitle"
                 android:orientation="horizontal"
                 android:layout_marginVertical="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/storeTitle"
+                android:id="@+id/storeTitle1"
                 android:text="제1학생회관"
                 android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_below="@id/borderBottom1"/>
+                android:textSize="20dp" />
             <LinearLayout
                 android:id="@+id/borderBottom2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"
-                android:layout_below="@id/storeTitle"
                 android:orientation="horizontal"
                 android:layout_marginVertical="10dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/itemList1"
-                android:layout_below="@id/borderBottom2"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="아메리카노" />
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:text="2000원"/>
-                    <Button
-                        android:id="@+id/delete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="삭제"
-                        android:textColor="@color/colorAccent"
-                        android:background="@drawable/border"
-                        />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="옵션 : 수량 1 / ICE / 헤이즐럿 시럽 추가"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/colorAccent"
-                    android:layout_marginVertical="10dp"/>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/storeTitle2"
+                android:text="제2학생회관"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+            <LinearLayout
+                android:id="@+id/borderBottom3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/itemList2"
-                android:layout_below="@id/itemList1"
                 android:orientation="vertical">
-                <LinearLayout
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/storeTitle3"
+                android:text="도서관 카페"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+            <LinearLayout
+                android:id="@+id/borderBottom4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemList3"
+                android:orientation="vertical">
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/storeTitle4"
+                android:text="테크노큐브 카페"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+            <LinearLayout
+                android:id="@+id/borderBottom5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemList4"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="딸기 스무디" />
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -111,66 +126,29 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
                         android:layout_marginRight="20dp"
-                        android:text="3500원"/>
-                    <Button
-                        android:id="@+id/delete2"
+                        android:text="합계:" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="삭제"
+                        android:layout_marginRight="20dp"
+                        android:textSize="20dp"
                         android:textColor="@color/colorAccent"
-                        android:background="@drawable/border"
-                        />
+                        android:textStyle="bold"
+                        android:text="0원"
+                        android:id="@+id/total"/>
                 </LinearLayout>
-                <TextView
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="옵션 : 수량 1 / ICE "/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/colorAccent"
-                    android:layout_marginVertical="10dp"/>
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:text="결제하기"
+                    android:id="@+id/buy"/>
             </LinearLayout>
-
-        </RelativeLayout>
     </ScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:layout_marginRight="20dp"
-                android:text="합계:" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:textSize="20dp"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:text="5500원"/>
-        </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="결제하기"/>
-    </LinearLayout>
 </RelativeLayout>

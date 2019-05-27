@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class OptionDialog extends Dialog implements View.OnClickListener{
+import java.util.Vector;
+
+public class OptionDialog extends Dialog implements View.OnClickListener {
     private static final int LAYOUT = R.layout.activity_option;
 
     private Context context;
+    private Object object;
 
     private TextView cancel;
     private TextView ok;
@@ -23,9 +28,10 @@ public class OptionDialog extends Dialog implements View.OnClickListener{
     private int countVal1 = 1;
     private int countVal2 = 0;
 
-    public OptionDialog(@NonNull Context context) {
+    public OptionDialog(@NonNull Context context, Object object) {
         super(context);
         this.context = context;
+        this.object = object;
     }
 
     @Override
@@ -81,6 +87,14 @@ public class OptionDialog extends Dialog implements View.OnClickListener{
                 cancel();
                 break;
             case R.id.ok:
+
+                Toast.makeText(getContext(),"장바구니에 담았습니다..",Toast.LENGTH_LONG).show();
+                dismiss();
+                //Object object1 = new Object("제1학생회관","아메리카노", 1500, "바닐라시럽");
+                //Object object2 = new Object("제1학생회관","핫초코", 3500, "초코시럽");
+
+                Reservation.ObjectList.add(object);
+                //Reservation.ObjectList.add(object2);
                 break;
         }
     }

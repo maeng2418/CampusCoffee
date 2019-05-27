@@ -1,14 +1,15 @@
 package com.example.campuscoffee;
 
-public class Stores {
+public class Menu {
     public int id;
     public String created_at;
     public String updated_at;
-    public String file;
-    public String name;
-    public String temperature;
-    public String price;
+    public int count;
+    public String option;
+    public int price;
     public int creator;
+    public int store;
+    public int menu;
 
     public int getId() {
         return id;
@@ -34,35 +35,27 @@ public class Stores {
         this.updated_at = updated_at;
     }
 
-    public String getFile() {
-        return file;
+    public int getCount() {
+        return count;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public String getName() {
-        return name;
+    public String getOption() {
+        return option;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOption(String option) {
+        this.option = option;
     }
 
-    public String getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
-    }
-
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -73,4 +66,21 @@ public class Stores {
     public void setCreator(int creator) {
         this.creator = creator;
     }
+
+    public int getStore() {
+        return store;
+    }
+
+    public void setStore(int store) {
+        this.store = store;
+    }
+
+    public int getMenu() {
+        return menu;
+    }
+
+    public void setMenu(int menu) {
+        this.menu = menu;
+    }
+
 }
