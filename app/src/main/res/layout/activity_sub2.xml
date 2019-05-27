@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/activity_base"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/signboard1"
+                android:textSize="40dp"
+                android:layout_centerHorizontal="true"
+                android:text="제1학생회관 카페"/>
+            <RatingBar
+                android:id="@+id/ratingBar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/signboard1"
+                android:layout_centerHorizontal="true"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="0.5"
+                android:max="5" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ratingBar1"
+                android:id="@+id/reviewCount1"
+                android:textSize="20dp"
+                android:layout_centerHorizontal="true"
+                android:text="최근리뷰 11 | 최근사장님댓글 10"/>
+
+            <!-- border bottom 효과를 위한 설정 -->
+            <LinearLayout
+                android:id="@+id/borderBottom1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:layout_below="@id/reviewCount1"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/borderBottom1"
+                android:id="@+id/paymentText1"
+                android:textSize="20dp"
+                android:text=" 최소주문금액 10000원\n 결제방법 바로결제, 만나서 결제"/>
+            <LinearLayout
+                android:id="@+id/contactMenu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/paymentText1"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"
+                android:layout_centerHorizontal="true">
+                <Button
+                    android:id="@+id/call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전화"
+                    android:background="@drawable/border"/>
+                <Button
+                    android:id="@+id/zzim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="찜"
+                    android:background="@drawable/border"/>
+                <Button
+                    android:id="@+id/share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공유"
+                    android:background="@drawable/border"/>
+            </LinearLayout>
+
+            <!-- border bottom 효과를 위한 설정 -->
+            <LinearLayout
+                android:id="@+id/borderBottom2"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent"
+                android:layout_below="@id/contactMenu1"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"/>
+
+            //탭레이아웃(탭버튼을 담는다.)
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/borderBottom2"
+                android:elevation="1dp"
+                android:background="@android:color/background_light"
+                app:tabMode="fixed"
+                app:tabGravity="fill"
+                app:tabTextColor="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/colorAccent">
+            </android.support.design.widget.TabLayout>
+
+            //프레그먼트 넣을 곳
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tabs1"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            </FrameLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
