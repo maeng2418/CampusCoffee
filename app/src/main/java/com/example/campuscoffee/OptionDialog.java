@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Vector;
 
 public class OptionDialog extends Dialog implements View.OnClickListener {
     private static final int LAYOUT = R.layout.activity_option;
@@ -20,13 +20,22 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
 
     private TextView cancel;
     private TextView ok;
-    private TextView count1;
-    private TextView count2;
+    private TextView quantity;
+    private TextView shot;
+    private CheckBox hazelnutSyrup;
+    private CheckBox vanillaSyrup;
+    private CheckBox chocoSyrup;
+    private RadioGroup selectTemperature;
+    private Button plusShot;
+    private Button minusShot;
+    private Button plusQuantity;
+    private Button minusQuantity;
+
 
     private String name;
 
-    private int countVal1 = 1;
-    private int countVal2 = 0;
+    private int quantityValue = 1;
+    private int shotValue = 0;
 
     public OptionDialog(@NonNull Context context, Object object) {
         super(context);
@@ -38,23 +47,34 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
+        mappingViews();
+        setListeners();
+    }
 
-        Button minus1 = (Button) findViewById(R.id.minus1);
-        Button plus1 = (Button) findViewById(R.id.plus1);
+    private void mappingViews(){
+        shot = (TextView) findViewById(R.id.shot);
+        plusShot = (Button) findViewById(R.id.plusShot);
+        minusShot = (Button) findViewById(R.id.minusShot);
 
-        Button minus2 = (Button) findViewById(R.id.minus2);
-        Button plus2 = (Button) findViewById(R.id.plus2);
+        selectTemperature = (RadioGroup)findViewById(R.id.selectTemperature);
+
+        quantity = (TextView) findViewById(R.id.quantity);
+        plusQuantity = (Button) findViewById(R.id.plusQuantity);
+        minusQuantity = (Button) findViewById(R.id.minusQuantity);
+
+        hazelnutSyrup = (CheckBox)findViewById(R.id.hazelnutSyrup);
+        vanillaSyrup = (CheckBox)findViewById(R.id.vanillaSyrup);
+        chocoSyrup = (CheckBox)findViewById(R.id.chocoSyrup);
 
         cancel = (TextView) findViewById(R.id.cancel);
         ok = (TextView) findViewById(R.id.ok);
+    }
 
-        count1 = (TextView) findViewById(R.id.count1);
-        count2 = (TextView) findViewById(R.id.count2);
-
-        minus1.setOnClickListener(this);
-        minus2.setOnClickListener(this);
-        plus1.setOnClickListener(this);
-        plus2.setOnClickListener(this);
+    private void setListeners(){
+        minusQuantity.setOnClickListener(this);
+        minusShot.setOnClickListener(this);
+        plusQuantity.setOnClickListener(this);
+        plusShot.setOnClickListener(this);
         cancel.setOnClickListener(this);
         ok.setOnClickListener(this);
     }
@@ -63,38 +83,43 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.plus1:
-                countVal1++;
-                count1.setText(String.valueOf(countVal1));
+            case R.id.plusQuantity:
+                quantityValue++;
+                quantity.setText(String.valueOf(quantityValue));
                 break;
-            case R.id.plus2:
-                countVal2++;
-                count2.setText(String.valueOf(countVal2));
+            case R.id.plusShot:
+                shotValue++;
+                shot.setText(String.valueOf(shotValue));
                 break;
-            case R.id.minus1:
-                countVal1--;
-                if (countVal1<1)
-                    countVal1 = 1;
-                count1.setText(String.valueOf(countVal1));
+            case R.id.minusQuantity:
+                quantityValue--;
+                if (quantityValue <1)
+                    quantityValue = 1;
+                quantity.setText(String.valueOf(quantityValue));
                 break;
-            case R.id.minus2:
-                countVal2--;
-                if (countVal2<0)
-                    countVal2 = 0;
-                count2.setText(String.valueOf(countVal2));
+            case R.id.minusShot:
+                shotValue--;
+                if (shotValue <0)
+                    shotValue = 0;
+                shot.setText(String.valueOf(shotValue));
                 break;
             case R.id.cancel:
                 cancel();
                 break;
             case R.id.ok:
-
-                Toast.makeText(getContext(),"장바구니에 담았습니다..",Toast.LENGTH_LONG).show();
+                String syrups = "";
+                String temperature;
+                syrups = hazelnutSyrup.isChecked()? syrups+"헤이즐넛 ":syrups;
+                syrups = vanillaSyrup.isChecked()? syrups+"바닐라 ":syrups;
+                syrups = chocoSyrup.isChecked()? syrups+"초코":syrups;
+                temperature = selectTemperature.getCheckedRadioButtonId() == R.id.hot? "HOT": "ICE";
+                Toast.makeText(getContext(),
+                        Integer.toString(quantityValue)+"개, "+
+                        temperature+", 샷 추가: "+Integer.toString(shotValue)+"회, "
+                        +"시럽 추가: "+syrups
+                        ,Toast.LENGTH_LONG).show();
                 dismiss();
-                //Object object1 = new Object("제1학생회관","아메리카노", 1500, "바닐라시럽");
-                //Object object2 = new Object("제1학생회관","핫초코", 3500, "초코시럽");
-
                 Reservation.ObjectList.add(object);
-                //Reservation.ObjectList.add(object2);
                 break;
         }
     }
