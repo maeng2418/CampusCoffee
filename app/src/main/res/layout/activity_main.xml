@@ -39,13 +39,19 @@
                         android:layout_height="200dp"
                         android:id="@+id/no1"
                         android:text="제1학생회관"
-                        android:onClick="onClick"/>
+                        android:onClick="onClick"
+                        android:background="@drawable/storeicon"
+                        android:fontFamily="@font/nanumpen"
+                        android:textSize="30dp"/>
                     <Button
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:id="@+id/no2"
                         android:text="제2학생회관"
-                        android:onClick="onClick"/>
+                        android:onClick="onClick"
+                        android:background="@drawable/storeicon"
+                        android:fontFamily="@font/nanumpen"
+                        android:textSize="30dp"/>
                 </TableRow>
                 <TableRow
                     android:gravity="center_horizontal">
@@ -54,13 +60,19 @@
                         android:layout_height="200dp"
                         android:id="@+id/no3"
                         android:text="도서관카페"
-                        android:onClick="onClick"/>
+                        android:onClick="onClick"
+                        android:background="@drawable/storeicon"
+                        android:fontFamily="@font/nanumpen"
+                        android:textSize="30dp"/>
                     <Button
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:id="@+id/no4"
                         android:text="테크노큐브"
-                        android:onClick="onClick"/>
+                        android:onClick="onClick"
+                        android:background="@drawable/storeicon"
+                        android:fontFamily="@font/nanumpen"
+                        android:textSize="30dp"/>
                 </TableRow>
             </TableLayout>
         </RelativeLayout>

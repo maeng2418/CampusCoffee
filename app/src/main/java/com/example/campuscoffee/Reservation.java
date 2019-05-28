@@ -48,6 +48,8 @@ public class Reservation extends BaseActivity {
 
     static Vector ObjectList = new Vector <Object>();
 
+    static Vector copyObjectList = new Vector <Object>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +79,19 @@ public class Reservation extends BaseActivity {
                     Toast.makeText(getApplicationContext(),"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show();
                     for (int i = 0; i<ObjectList.size();i++){
                         Object object = (Object) ObjectList.elementAt(i);
-                        payment(object.store, object.menuId);
+                        payment(object.store, object.menuId, Integer.toString(object.price));
                     }
 
                     for(int i =0; i<layoutList.size(); i++){
                         LinearLayout ll = (LinearLayout)layoutList.elementAt(i);
                         ll.removeAllViews();
                     }
+                    copyObjectList = (Vector)ObjectList.clone();
                     ObjectList.removeAllElements();
+                    total = 0;
+                    TextView resetTotal = (TextView) findViewById(R.id.total);
+                    resetTotal.setText("0원");
+
 
 
 
@@ -98,6 +105,7 @@ public class Reservation extends BaseActivity {
     }
 //
     public void createReservation (Object obj){
+        final Object  element = obj;
         //LinearLayout itemList;
         switch (obj.store){
             case 2:
@@ -120,9 +128,8 @@ public class Reservation extends BaseActivity {
                 itemList = null;
         }
 
-        LinearLayout content = new LinearLayout(this);
+        final LinearLayout content = new LinearLayout(this);
         //content.setOrientation(LinearLayout.HORIZONTAL);
-        content.setId(obj.menuId);
 
         LinearLayout.LayoutParams contentParam = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -164,13 +171,14 @@ public class Reservation extends BaseActivity {
         delete.setBackground(getResources().getDrawable(R.drawable.border));
         delete.setLayoutParams(param);
 
+
+
         content.addView(delete);
 
         itemList.addView(content);
 
-        LinearLayout optionList = new LinearLayout(this);
+        final LinearLayout optionList = new LinearLayout(this);
         optionList.setOrientation(LinearLayout.VERTICAL);
-        optionList.setId(obj.menuId);
 
         LinearLayout.LayoutParams optionParam = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -201,17 +209,30 @@ public class Reservation extends BaseActivity {
 
         itemList.addView(optionList);
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                content.removeAllViews();
+                optionList.removeAllViews();
+                total -= element.price;
+                ObjectList.remove(element);
+                TextView reTotal = (TextView) findViewById(R.id.total);
+                reTotal.setText(Integer.toString(total) +"원");
+            }
+        });
+
     }
 
-    public void payment(int store, int menu){
+    public void payment(int store, int menu, String price){
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("109e410e.ngrok.io");
+        application.buildNetworkService("0e4751c0.ngrok.io");
         //application.buildNetworkService("127.0.0.1", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
         HashMap<String, java.lang.Object> input = new HashMap<>();
-        input.put("buyer", "김명성");
+        input.put("buyer", "maeng");
         input.put("menu", menu);
+        input.put("price", price);
         networkService.post_stores(store, input).enqueue(new Callback<Menu>() {
             @Override
             public void onResponse(Call<Menu> call, Response<Menu> response) {
@@ -243,11 +264,4 @@ public class Reservation extends BaseActivity {
         return R.layout.activity_reservation;
     }
 
-
-    public void deleteClick(int i){
-        LinearLayout deleteItem = (LinearLayout) layoutList.elementAt(i);
-        deleteItem.removeAllViews();
-        ObjectList.remove(i);
-
-    }
 }

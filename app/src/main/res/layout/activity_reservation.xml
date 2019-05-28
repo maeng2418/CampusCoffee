@@ -11,8 +11,9 @@
         layout="@layout/activity_base"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/header"
+        android:layout_above="@id/bottomLayout"
         android:id="@+id/scroll">
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,39 +117,46 @@
                 android:id="@+id/itemList4"
                 android:orientation="vertical">
             </LinearLayout>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20dp"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"
-                        android:layout_marginRight="20dp"
-                        android:text="합계:" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:textSize="20dp"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"
-                        android:text="0원"
-                        android:id="@+id/total"/>
-                </LinearLayout>
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:text="결제하기"
-                    android:id="@+id/buy"/>
-            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/bottomLayout"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:text="합계:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:text="0원"
+                android:id="@+id/total"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="결제하기"
+            android:id="@+id/buy"/>
+    </LinearLayout>
 </RelativeLayout>

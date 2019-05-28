@@ -28,4 +28,7 @@ public interface NetworkService {
     @POST("/stores/{store}/order/")
     Call<Menu> post_stores(@Path("store") int store, @FieldMap HashMap<String, java.lang.Object> param);
 
+    @GET("/stores/all/orders/{buyer}/")
+    Call<List<Order>> get_timer(@Path("buyer") String buyer);
+
 }

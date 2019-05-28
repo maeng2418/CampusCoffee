@@ -93,6 +93,8 @@ public class BaseActivity extends AppCompatActivity {
 
             case android.R.id.home: {
                 finish();
+                Intent main = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(main);
                 return true;
             }
 

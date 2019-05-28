@@ -7,11 +7,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +30,15 @@ public class OrderList extends BaseActivity {
     //public final String TAG = "KJH";
     private NetworkService networkService;
     //ProgressDialog dialog;
+    //Vector bought = new Vector ();
+
+    String s1 = "제1학생회관 카페\n";
+    String s2 = "제2학생회관 카페\n";
+    String s3 = "도서관 카페\n";
+    String s4 = "테크노큐브 카페\n";
+
+    LinearLayout itemList;
+    Vector layoutList = new Vector <LinearLayout>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,44 +71,55 @@ public class OrderList extends BaseActivity {
         protected Void doInBackground(Void... params) {
             // TODO Auto-generated method stub
 
-            ApplicationController application = ApplicationController.getInstance();
-            application.buildNetworkService("8b1c8139.ngrok.io");
-            //application.buildNetworkService("127.0.0.1", 8000);
-            networkService = ApplicationController.getInstance().getNetworkService();
+            String buyer = "maeng";
 
-            Call<List<Stores>> getCall = networkService.get_stores();
-            getCall.enqueue(new Callback<List<Stores>>() {
-                @Override
-                public void onResponse(Call<List<Stores>> call, Response<List<Stores>> response) {
-                    if( response.isSuccessful()) {
-                        List<Stores> storesList = response.body();
-                        TextView textView = (TextView) findViewById(R.id.textView) ;
+            /*
+            for(int i=0; i<Reservation.copyObjectList.size();i++) {
+                Object obj = (Object) Reservation.copyObjectList.elementAt(i);
+                int store = obj.store;
+            }
+            */
 
-                        String restaurant_txt = "";
-                        for(Stores stores : storesList){
-                            restaurant_txt +=
-                                    stores.getId() + "\n"+
-                                            stores.getCreated_at() + "\n"+
-                                            stores.getUpdated_at() + "\n"+
-                                            stores.getFile() + "\n"+
-                                            stores.getName() + "\n"+
-                                            stores.getTemperature() + "\n"+
-                                            stores.getPrice() +
-                                            "\n";
+
+                ApplicationController application = ApplicationController.getInstance();
+                application.buildNetworkService("0e4751c0.ngrok.io");
+                //application.buildNetworkService("127.0.0.1", 8000);
+                networkService = ApplicationController.getInstance().getNetworkService();
+
+                Call<List<Order>> getCall = networkService.get_timer(buyer);
+                getCall.enqueue(new Callback<List<Order>>() {
+                    @Override
+                    public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                        if( response.isSuccessful()) {
+                            List<Order> orderList = response.body();
+
+                            //TextView textView = (TextView) findViewById(R.id.textView) ;
+
+                            for(Order orders : orderList){
+
+                                //조리중 : 0 완료 : 1
+                                if(orders.getTimer() == true){
+                                    createOrderList(orders, "완료");
+                                }
+                                else{
+                                    createOrderList(orders, "조리중");
+                                }
+                            }
+
+
+                        } else {
+                            int StatusCode = response.code();
+                            Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody());
                         }
-                        textView.setText(restaurant_txt);
-
-                    } else {
-                        int StatusCode = response.code();
-                        Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody());
                     }
-                }
 
-                @Override
-                public void onFailure(Call<List<Stores>> call, Throwable t) {
-                    Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<List<Order>> call, Throwable t) {
+                        Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
+                    }
+                });
+
+
             return null;
         }
 
@@ -103,6 +132,83 @@ public class OrderList extends BaseActivity {
         }
 
 
+    }
+
+    public void createOrderList(Order orders, String state){
+        switch(orders.getStore()){
+            case 2:
+                itemList = (LinearLayout) findViewById(R.id.stateList1);
+                layoutList.add(itemList);
+                break;
+            case 3:
+                itemList = (LinearLayout) findViewById(R.id.stateList2);
+                layoutList.add(itemList);
+                break;
+            case 4:
+                itemList = (LinearLayout) findViewById(R.id.stateList3);
+                layoutList.add(itemList);
+                break;
+            case 5:
+                itemList = (LinearLayout) findViewById(R.id.stateList4);
+
+                layoutList.add(itemList);
+                break;
+        }
+
+        LinearLayout content = new LinearLayout(this);
+
+        TextView menu = new TextView(this);
+        OrderMenu om = orders.getMenu();
+        menu.setText(om.getName());
+        content.addView(menu);
+
+        View view = new View(this);
+
+        LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                1f
+        );
+
+        view.setMinimumWidth(0);
+        view.setMinimumHeight(0);
+        view.setLayoutParams(viewParams);
+        content.addView(view);
+
+        TextView price = new TextView(this);
+        price.setText(orders.getPrice() + " 원");
+        content.addView(price);
+
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+
+        param.leftMargin = 40;
+
+        Button stateBtn = new Button(this);
+        stateBtn.setText(state);
+        stateBtn.setTextColor(getResources().getColor(R.color.colorAccent));
+        stateBtn.setBackground(getResources().getDrawable(R.drawable.border));
+        stateBtn.setLayoutParams(param);
+
+        content.addView(stateBtn);
+        itemList.addView(content);
+
+        LinearLayout borderLine = new LinearLayout(this);
+
+        LinearLayout.LayoutParams borderLineParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        );
+
+        borderLineParams.height = 4;
+        borderLineParams.topMargin = 20;
+        borderLineParams.bottomMargin = 20;
+        borderLine.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        borderLine.setLayoutParams(borderLineParams);
+
+        itemList.addView(borderLine);
     }
 
     @Override

@@ -7,9 +7,113 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/activity_base"/>
-    <TextView
-        android:text="TextView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView" />
+        android:layout_below="@id/header"
+        android:id="@+id/scroll">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cartTitle"
+                android:textSize="30dp"
+                android:layout_gravity="center_horizontal"
+                android:text="장바구니"
+                android:textStyle="bold"/>
+            <LinearLayout
+                android:id="@+id/borderBottom1"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/storeTitle1"
+                android:text="제1학생회관"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+            <LinearLayout
+                android:id="@+id/borderBottom2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stateList1"
+                android:orientation="vertical">
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/storeTitle2"
+                android:text="제2학생회관"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+            <LinearLayout
+                android:id="@+id/borderBottom3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stateList2"
+                android:orientation="vertical">
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/storeTitle3"
+                android:text="도서관 카페"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+            <LinearLayout
+                android:id="@+id/borderBottom4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stateList3"
+                android:orientation="vertical">
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/storeTitle4"
+                android:text="테크노큐브 카페"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+            <LinearLayout
+                android:id="@+id/borderBottom5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stateList4"
+                android:orientation="vertical">
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

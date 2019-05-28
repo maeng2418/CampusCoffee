@@ -19,6 +19,6 @@
             android:text="Campus Coffee"
             android:layout_gravity="center"
             android:id="@+id/toolbar_title"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
     </android.support.v7.widget.Toolbar>
 </RelativeLayout>
