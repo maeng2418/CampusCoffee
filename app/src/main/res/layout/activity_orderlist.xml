@@ -22,7 +22,7 @@
                 android:id="@+id/cartTitle"
                 android:textSize="30dp"
                 android:layout_gravity="center_horizontal"
-                android:text="장바구니"
+                android:text="주문내역"
                 android:textStyle="bold"/>
             <LinearLayout
                 android:id="@+id/borderBottom1"

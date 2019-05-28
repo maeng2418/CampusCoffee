@@ -82,7 +82,7 @@ public class OrderList extends BaseActivity {
 
 
                 ApplicationController application = ApplicationController.getInstance();
-                application.buildNetworkService("0e4751c0.ngrok.io");
+                application.buildNetworkService("bd2ba808.ngrok.io");
                 //application.buildNetworkService("127.0.0.1", 8000);
                 networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -97,12 +97,13 @@ public class OrderList extends BaseActivity {
 
                             for(Order orders : orderList){
 
-                                //조리중 : 0 완료 : 1
-                                if(orders.getTimer() == true){
-                                    createOrderList(orders, "완료");
-                                }
-                                else{
+                                //조리중 : 2 완료 : 3
+                                if (orders.getProgress() == 1){
                                     createOrderList(orders, "조리중");
+                                }else if(orders.getProgress() == 2){
+                                    createOrderList(orders, "완료");
+                                } else{
+                                    createOrderList(orders, "접수중");
                                 }
                             }
 

@@ -1,30 +1,28 @@
 package com.example.campuscoffee;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.List;
 
 public class Order {
     public int id;
-    public String created_at;
-    public String updated_at;
+    //public String created_at;
+    //public String updated_at;
     public String buyer;
     public int count;
     public String option;
     public String price;
-    public boolean timer;
     public int store;
     public OrderMenu menu;
+    public int progress;
 
-
-    public boolean getTimer() {
-        return timer;
+    public int getProgress() {
+        return progress;
     }
 
-    public void setTimer(boolean timer) {
-        this.timer = timer;
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
+
+
+
 
     public int getId() {
         return id;
@@ -33,7 +31,7 @@ public class Order {
     public void setId(int id) {
         this.id = id;
     }
-
+/*
     public String getCreated_at() {
         return created_at;
     }
@@ -50,6 +48,7 @@ public class Order {
         this.updated_at = updated_at;
     }
 
+    */
     public String getBuyer() {
         return buyer;
     }

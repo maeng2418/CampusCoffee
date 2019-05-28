@@ -225,7 +225,7 @@ public class Reservation extends BaseActivity {
 
     public void payment(int store, int menu, String price){
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("0e4751c0.ngrok.io");
+        application.buildNetworkService("bd2ba808.ngrok.io");
         //application.buildNetworkService("127.0.0.1", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -233,6 +233,7 @@ public class Reservation extends BaseActivity {
         input.put("buyer", "maeng");
         input.put("menu", menu);
         input.put("price", price);
+        //input.put("timer", "doing");
         networkService.post_stores(store, input).enqueue(new Callback<Menu>() {
             @Override
             public void onResponse(Call<Menu> call, Response<Menu> response) {
