@@ -228,7 +228,7 @@ public class Reservation extends BaseActivity {
 
     public void payment(int store, int menu, String price){
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("26793533.ngrok.io");
+        application.buildNetworkService("f42cad08.ngrok.io");
         //application.buildNetworkService("127.0.0.1", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 

@@ -82,7 +82,7 @@ public class OrderList extends BaseActivity {
 
 
                 ApplicationController application = ApplicationController.getInstance();
-                application.buildNetworkService("26793533.ngrok.io");
+                application.buildNetworkService("f42cad08.ngrok.io");
                 //application.buildNetworkService("127.0.0.1", 8000);
                 networkService = ApplicationController.getInstance().getNetworkService();
 

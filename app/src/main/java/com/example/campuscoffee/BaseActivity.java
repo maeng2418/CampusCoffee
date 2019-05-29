@@ -69,7 +69,7 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         if(Reservation.orderCount != 0){
-            menu.findItem(R.id.cart).setTitle("주문내역"+"      "+ Integer.toString(Reservation.orderCount));
+            menu.findItem(R.id.order_list).setTitle("주문내역"+"      "+ Integer.toString(Reservation.orderCount));
         }
 
         return super.onPrepareOptionsMenu(menu);
