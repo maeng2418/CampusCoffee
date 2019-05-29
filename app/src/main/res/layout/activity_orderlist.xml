@@ -37,7 +37,8 @@
                 android:id="@+id/storeTitle1"
                 android:text="제1학생회관"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:onClick="onClick"/>
             <LinearLayout
                 android:id="@+id/borderBottom2"
                 android:layout_width="match_parent"
@@ -58,7 +59,8 @@
                 android:id="@+id/storeTitle2"
                 android:text="제2학생회관"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:onClick="onClick"/>
             <LinearLayout
                 android:id="@+id/borderBottom3"
                 android:layout_width="match_parent"
@@ -79,7 +81,8 @@
                 android:id="@+id/storeTitle3"
                 android:text="도서관 카페"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:onClick="onClick"/>
             <LinearLayout
                 android:id="@+id/borderBottom4"
                 android:layout_width="match_parent"
@@ -100,7 +103,8 @@
                 android:id="@+id/storeTitle4"
                 android:text="테크노큐브 카페"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:onClick="onClick"/>
             <LinearLayout
                 android:id="@+id/borderBottom5"
                 android:layout_width="match_parent"

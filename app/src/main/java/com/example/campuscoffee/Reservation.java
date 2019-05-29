@@ -66,6 +66,7 @@ public class Reservation extends BaseActivity {
     LinearLayout itemList;
 
     Vector layoutList = new Vector <LinearLayout>();
+    Vector textList = new Vector <TextView>();
 
     static Vector ObjectList = new Vector <Object>();
 
@@ -73,13 +74,16 @@ public class Reservation extends BaseActivity {
 
     static int orderCount = 0;
 
+    TextView title;
+
+    LinearLayout borderBottom;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
         initLayout();
-
 
         if (ObjectList.capacity() != 0) {
             for (int i = 0; i<ObjectList.size(); i++){
@@ -108,6 +112,12 @@ public class Reservation extends BaseActivity {
                     for(int i =0; i<layoutList.size(); i++){
                         LinearLayout ll = (LinearLayout)layoutList.elementAt(i);
                         ll.removeAllViews();
+                        ll.setVisibility(View.GONE);
+                    }
+
+                    for(int i = 0; i<textList.size();i++){
+                        TextView tv = (TextView)textList.elementAt(i);
+                        tv.setVisibility(View.GONE);
                     }
                     copyObjectList = (Vector)ObjectList.clone();
                     ObjectList.removeAllElements();
@@ -133,24 +143,42 @@ public class Reservation extends BaseActivity {
         //LinearLayout itemList;
         switch (obj.store){
             case 2:
+                title = (TextView) findViewById(R.id.storeTitle1) ;
+                borderBottom = (LinearLayout) findViewById(R.id.borderBottom2) ;
                 itemList = (LinearLayout) findViewById(R.id.itemList1);
+                textList.add(title);
+                layoutList.add(borderBottom);
                 layoutList.add(itemList);
                 break;
             case 3:
+                title = (TextView) findViewById(R.id.storeTitle2) ;
+                borderBottom = (LinearLayout) findViewById(R.id.borderBottom3) ;
                 itemList = (LinearLayout) findViewById(R.id.itemList2);
+                textList.add(title);
+                layoutList.add(borderBottom);
                 layoutList.add(itemList);
                 break;
             case 4:
+                title = (TextView) findViewById(R.id.storeTitle3) ;
+                borderBottom = (LinearLayout) findViewById(R.id.borderBottom4) ;
                 itemList = (LinearLayout) findViewById(R.id.itemList3);
+                textList.add(title);
+                layoutList.add(borderBottom);
                 layoutList.add(itemList);
                 break;
             case 5:
+                title = (TextView) findViewById(R.id.storeTitle4) ;
+                borderBottom = (LinearLayout) findViewById(R.id.borderBottom5) ;
                 itemList = (LinearLayout) findViewById(R.id.itemList4);
+                textList.add(title);
+                layoutList.add(borderBottom);
                 layoutList.add(itemList);
                 break;
             default:
                 itemList = null;
         }
+        title.setVisibility(View.VISIBLE);
+        borderBottom.setVisibility(View.VISIBLE);
 
         final LinearLayout content = new LinearLayout(this);
         //content.setOrientation(LinearLayout.HORIZONTAL);
@@ -249,7 +277,7 @@ public class Reservation extends BaseActivity {
 
     public void payment(int store, int menu, int count, String price){
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("574dcfdb.ngrok.io");
+        application.buildNetworkService("68dcce71.ngrok.io");
         //application.buildNetworkService("127.0.0.1", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
