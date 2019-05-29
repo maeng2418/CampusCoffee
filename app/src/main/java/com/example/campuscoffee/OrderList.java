@@ -83,7 +83,7 @@ public class OrderList extends BaseActivity {
 
 
                 ApplicationController application = ApplicationController.getInstance();
-                application.buildNetworkService("f42cad08.ngrok.io");
+                application.buildNetworkService("574dcfdb.ngrok.io");
                 //application.buildNetworkService("127.0.0.1", 8000);
                 networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -160,9 +160,16 @@ public class OrderList extends BaseActivity {
 
         LinearLayout content = new LinearLayout(this);
 
+        LinearLayout.LayoutParams menuParam = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+
         TextView menu = new TextView(this);
         OrderMenu om = orders.getMenu();
         menu.setText(om.getName());
+        menuParam.leftMargin=20;
+        menu.setLayoutParams(menuParam);
         content.addView(menu);
 
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
@@ -193,6 +200,7 @@ public class OrderList extends BaseActivity {
         );
 
         param.leftMargin = 40;
+        param.rightMargin = 20;
 
         Button stateBtn = new Button(this);
         stateBtn.setText(state);

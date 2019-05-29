@@ -40,7 +40,7 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
     private String name;
 
     static int quantityValue = 1;
-    static int shotValue = 1;
+    static int shotValue = 0;
     static String syrups = "";
     static String temperature;
 
@@ -133,7 +133,7 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
                 object.setCount(quantityValue);
                 object.setOption(Integer.toString(quantityValue)+"개, "
                         +"/ "+ temperature
-                        +"/ 샷 : "+Integer.toString(shotValue)
+                        +"/ 샷 추가 : "+Integer.toString(shotValue)
                         +"/ 시럽 : "+syrups);
                 quantityValue = 1;
                 shotValue = 1;
