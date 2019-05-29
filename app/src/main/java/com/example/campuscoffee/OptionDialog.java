@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -23,10 +25,11 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
     private TextView count1;
     private TextView count2;
 
-    private String name;
-
     private int countVal1 = 1;
     private int countVal2 = 0;
+
+
+    static int cartCount = 0;
 
     public OptionDialog(@NonNull Context context, Object object) {
         super(context);
@@ -92,6 +95,9 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
                 dismiss();
                 //Object object1 = new Object("제1학생회관","아메리카노", 1500, "바닐라시럽");
                 //Object object2 = new Object("제1학생회관","핫초코", 3500, "초코시럽");
+
+                cartCount++;
+
 
                 Reservation.ObjectList.add(object);
                 //Reservation.ObjectList.add(object2);

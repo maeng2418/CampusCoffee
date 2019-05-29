@@ -50,6 +50,8 @@ public class Reservation extends BaseActivity {
 
     static Vector copyObjectList = new Vector <Object>();
 
+    static int orderCount = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class Reservation extends BaseActivity {
                     total = 0;
                     TextView resetTotal = (TextView) findViewById(R.id.total);
                     resetTotal.setText("0원");
+                    orderCount ++;
 
 
 
@@ -225,7 +228,7 @@ public class Reservation extends BaseActivity {
 
     public void payment(int store, int menu, String price){
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("bd2ba808.ngrok.io");
+        application.buildNetworkService("26793533.ngrok.io");
         //application.buildNetworkService("127.0.0.1", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
