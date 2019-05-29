@@ -2,6 +2,7 @@ package com.example.campuscoffee;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -156,6 +157,7 @@ public class OrderList extends BaseActivity {
                 break;
         }
 
+
         LinearLayout content = new LinearLayout(this);
 
         TextView menu = new TextView(this);
@@ -163,18 +165,23 @@ public class OrderList extends BaseActivity {
         menu.setText(om.getName());
         content.addView(menu);
 
-        View view = new View(this);
-
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 1f
         );
 
+        View view = new View(this);
+
         view.setMinimumWidth(0);
         view.setMinimumHeight(0);
         view.setLayoutParams(viewParams);
         content.addView(view);
+
+        TextView count = new TextView(this);
+        count.setText(Integer.toString(orders.getCount())+" 개"+"            ");
+        content.addView(count);
+
 
         TextView price = new TextView(this);
         price.setText(orders.getPrice() + " 원");
@@ -194,7 +201,12 @@ public class OrderList extends BaseActivity {
         stateBtn.setLayoutParams(param);
 
         content.addView(stateBtn);
+
         itemList.addView(content);
+
+        if(state == "완료"){
+            stateBtn.setBackgroundColor(Color.parseColor("#c8c8c8"));
+        }
 
         LinearLayout borderLine = new LinearLayout(this);
 

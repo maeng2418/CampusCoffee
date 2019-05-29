@@ -52,7 +52,7 @@
                 android:layout_width="50sp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
-                android:id="@+id/minus1"
+                android:id="@+id/minusQuantity"
                 android:text="-"
                 android:textStyle="bold"
                 android:textSize="25sp"
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
-                android:id="@+id/count1"
+                android:id="@+id/quantity"
                 android:textSize="25sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginHorizontal="20sp"/>
@@ -69,7 +69,7 @@
                 android:layout_width="50sp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
-                android:id="@+id/plus1"
+                android:id="@+id/plusQuantity"
                 android:textStyle="bold"
                 android:textSize="25sp"
                 android:text="+"
@@ -93,12 +93,14 @@
             android:layout_gravity="center_vertical"
             android:layout_column="1"
             android:layout_row="1"
+            android:id="@+id/selectTemperature"
+            android:checkedButton="@id/hot"
             >
-
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ICE"
+                android:id="@+id/ice"
                 android:textSize="20sp"
                 android:layout_marginRight="20sp"/>
 
@@ -106,6 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOT"
+                android:id="@+id/hot"
                 android:textSize="20sp"/>
         </RadioGroup>
         <TextView
@@ -128,7 +131,7 @@
                 android:layout_width="50sp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
-                android:id="@+id/minus2"
+                android:id="@+id/minusShot"
                 android:text="-"
                 android:textStyle="bold"
                 android:textSize="25sp"
@@ -137,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:id="@+id/count2"
+                android:id="@+id/shot"
                 android:textSize="25sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginHorizontal="20sp"/>
@@ -145,7 +148,7 @@
                 android:layout_width="50sp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
-                android:id="@+id/plus2"
+                android:id="@+id/plusShot"
                 android:textStyle="bold"
                 android:textSize="25sp"
                 android:text="+"
@@ -162,30 +165,33 @@
             android:textStyle="bold"
             android:layout_marginRight="20sp"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="헤이즐럿"
-                android:textSize="20sp"
-                android:layout_column="1"
-                android:layout_row="3"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="헤이즐럿"
+            android:id="@+id/hazelnutSyrup"
+            android:textSize="20sp"
+            android:layout_column="1"
+            android:layout_row="3"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="바닐라"
-                android:textSize="20sp"
-                android:layout_column="1"
-                android:layout_row="4"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="바닐라"
+            android:id="@+id/vanillaSyrup"
+            android:textSize="20sp"
+            android:layout_column="1"
+            android:layout_row="4"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="초코"
-                android:textSize="20sp"
-                android:layout_column="1"
-                android:layout_row="5"
-                android:paddingBottom="16dp"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="초코"
+            android:id="@+id/chocoSyrup"
+            android:textSize="20sp"
+            android:layout_column="1"
+            android:layout_row="5"
+            android:paddingBottom="16dp"/>
     </GridLayout>
 
     <LinearLayout

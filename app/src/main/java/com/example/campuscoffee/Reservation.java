@@ -27,13 +27,34 @@ class Object {
     String menu;
     int menuId;
     int price;
+    int count;
+
     String option;
 
-    public Object(int store, String menu, int menuId, int price, String option){
+
+
+    public Object(int store, String menu, int menuId, int price, int count, String option){
         this.store = store;
         this.menu = menu;
         this.menuId = menuId;
         this.price = price;
+        this.option = option;
+        this.count = count;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
         this.option = option;
     }
 }
@@ -64,7 +85,7 @@ public class Reservation extends BaseActivity {
             for (int i = 0; i<ObjectList.size(); i++){
                 Object object = (Object) ObjectList.elementAt(i);
                 createReservation(object);
-                total += object.price;
+                total += object.price*object.count;
             }
         }
 
@@ -81,7 +102,7 @@ public class Reservation extends BaseActivity {
                     Toast.makeText(getApplicationContext(),"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show();
                     for (int i = 0; i<ObjectList.size();i++){
                         Object object = (Object) ObjectList.elementAt(i);
-                        payment(object.store, object.menuId, Integer.toString(object.price));
+                        payment(object.store, object.menuId, object.count, Integer.toString(object.price));
                     }
 
                     for(int i =0; i<layoutList.size(); i++){
@@ -157,7 +178,7 @@ public class Reservation extends BaseActivity {
         content.addView(view);
 
         TextView price = new TextView(this);
-        price.setText(Integer.toString(obj.price) + " 원");
+        price.setText(Integer.toString(obj.price*obj.count) + " 원");
         content.addView(price);
 
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
@@ -217,7 +238,7 @@ public class Reservation extends BaseActivity {
             public void onClick(View view) {
                 content.removeAllViews();
                 optionList.removeAllViews();
-                total -= element.price;
+                total -= element.price*element.count;
                 ObjectList.remove(element);
                 TextView reTotal = (TextView) findViewById(R.id.total);
                 reTotal.setText(Integer.toString(total) +"원");
@@ -226,7 +247,7 @@ public class Reservation extends BaseActivity {
 
     }
 
-    public void payment(int store, int menu, String price){
+    public void payment(int store, int menu, int count, String price){
         ApplicationController application = ApplicationController.getInstance();
         application.buildNetworkService("f42cad08.ngrok.io");
         //application.buildNetworkService("127.0.0.1", 8000);
@@ -235,7 +256,8 @@ public class Reservation extends BaseActivity {
         HashMap<String, java.lang.Object> input = new HashMap<>();
         input.put("buyer", "maeng");
         input.put("menu", menu);
-        input.put("price", price);
+        input.put("count", count);
+        input.put("price", Integer.toString(Integer.parseInt(price)*count));
         //input.put("timer", "doing");
         networkService.post_stores(store, input).enqueue(new Callback<Menu>() {
             @Override

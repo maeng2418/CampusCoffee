@@ -94,7 +94,7 @@ public class Fragment1  extends Fragment {
 
                                     listId.add(stores.getId());
                                     listName.add(stores.getName());
-                                    Object object = new Object(stores.getCreator(), stores.getName(), stores.getId(), Integer.parseInt(stores.getPrice()), stores.getTemperature());
+                                    Object object = new Object(stores.getCreator(), stores.getName(), stores.getId(), Integer.parseInt(stores.getPrice()), 0,"");
                                     listObject.add(object);
                                 }
                             }
