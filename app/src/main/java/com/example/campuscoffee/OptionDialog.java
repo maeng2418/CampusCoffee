@@ -4,13 +4,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Vector;
 
 public class OptionDialog extends Dialog implements View.OnClickListener {
     private static final int LAYOUT = R.layout.activity_option;
@@ -20,6 +24,8 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
 
     private TextView cancel;
     private TextView ok;
+    private TextView count1;
+    private TextView count2;
     private TextView quantity;
     private TextView shot;
     private CheckBox hazelnutSyrup;
@@ -31,11 +37,14 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
     private Button plusQuantity;
     private Button minusQuantity;
 
-
     private String name;
 
-    private int quantityValue = 1;
-    private int shotValue = 0;
+    static int quantityValue = 1;
+    static int shotValue = 0;
+    static String syrups = "";
+    static String temperature;
+
+    static int cartCount = 0;
 
     public OptionDialog(@NonNull Context context, Object object) {
         super(context);
@@ -79,6 +88,7 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
         ok.setOnClickListener(this);
     }
 
+
     @Override
     public void onClick(View v) {
 
@@ -107,19 +117,30 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
                 cancel();
                 break;
             case R.id.ok:
-                String syrups = "";
-                String temperature;
                 syrups = hazelnutSyrup.isChecked()? syrups+"헤이즐넛 ":syrups;
                 syrups = vanillaSyrup.isChecked()? syrups+"바닐라 ":syrups;
                 syrups = chocoSyrup.isChecked()? syrups+"초코":syrups;
                 temperature = selectTemperature.getCheckedRadioButtonId() == R.id.hot? "HOT": "ICE";
+
+                //Toast.makeText(getContext(),"장바구니에 담았습니다..",Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),
                         Integer.toString(quantityValue)+"개, "+
-                        temperature+", 샷 추가: "+Integer.toString(shotValue)+"회, "
-                        +"시럽 추가: "+syrups
+                                temperature+", 샷 추가: "+Integer.toString(shotValue)+"회, "
+                                +"시럽 추가: "+syrups
                         ,Toast.LENGTH_LONG).show();
                 dismiss();
+                cartCount++;
+                object.setCount(quantityValue);
+                object.setOption(Integer.toString(quantityValue)+"개, "
+                        +"/ "+ temperature
+                        +"/ 샷 추가 : "+Integer.toString(shotValue)
+                        +"/ 시럽 : "+syrups);
+                quantityValue = 1;
+                shotValue = 1;
+                syrups = "";
+                temperature = "";
                 Reservation.ObjectList.add(object);
+
                 break;
         }
     }

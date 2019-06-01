@@ -54,10 +54,27 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //return super.onCreateOptionsMenu(menu);
+
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
+
         return true;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        if(OptionDialog.cartCount != 0){
+            menu.findItem(R.id.cart).setTitle("장바구니"+"      "+ Integer.toString(OptionDialog.cartCount));
+        }
+
+        if(Reservation.orderCount != 0){
+            menu.findItem(R.id.order_list).setTitle("주문내역"+"      "+ Integer.toString(Reservation.orderCount));
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
 
     //추가된 소스, ToolBar에 추가된 항목의 select 이벤트를 처리하는 함수
     @Override
@@ -78,12 +95,14 @@ public class BaseActivity extends AppCompatActivity {
                 // User chose the "Settings" item, show the app settings UI...
                 Intent orderList = new Intent(getApplicationContext(), OrderList.class);
                 startActivity(orderList);
+                Reservation.orderCount = 0;
                 return true;
 
             case R.id.cart:
                 // User chose the "Settings" item, show the app settings UI...
                 Intent reservation = new Intent(getApplicationContext(), Reservation.class);
                 startActivity(reservation);
+                OptionDialog.cartCount = 0;
                 return true;
 
             case R.id.my_review:

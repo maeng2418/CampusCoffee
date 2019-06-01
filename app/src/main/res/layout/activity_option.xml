@@ -165,33 +165,33 @@
             android:textStyle="bold"
             android:layout_marginRight="20sp"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="헤이즐럿"
-                android:id="@+id/hazelnutSyrup"
-                android:textSize="20sp"
-                android:layout_column="1"
-                android:layout_row="3"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="헤이즐럿"
+            android:id="@+id/hazelnutSyrup"
+            android:textSize="20sp"
+            android:layout_column="1"
+            android:layout_row="3"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="바닐라"
-                android:id="@+id/vanillaSyrup"
-                android:textSize="20sp"
-                android:layout_column="1"
-                android:layout_row="4"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="바닐라"
+            android:id="@+id/vanillaSyrup"
+            android:textSize="20sp"
+            android:layout_column="1"
+            android:layout_row="4"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="초코"
-                android:id="@+id/chocoSyrup"
-                android:textSize="20sp"
-                android:layout_column="1"
-                android:layout_row="5"
-                android:paddingBottom="16dp"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="초코"
+            android:id="@+id/chocoSyrup"
+            android:textSize="20sp"
+            android:layout_column="1"
+            android:layout_row="5"
+            android:paddingBottom="16dp"/>
     </GridLayout>
 
     <LinearLayout

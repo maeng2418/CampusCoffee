@@ -27,13 +27,34 @@ class Object {
     String menu;
     int menuId;
     int price;
+    int count;
+
     String option;
 
-    public Object(int store, String menu, int menuId, int price, String option){
+
+
+    public Object(int store, String menu, int menuId, int price, int count, String option){
         this.store = store;
         this.menu = menu;
         this.menuId = menuId;
         this.price = price;
+        this.option = option;
+        this.count = count;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
         this.option = option;
     }
 }
@@ -45,10 +66,17 @@ public class Reservation extends BaseActivity {
     LinearLayout itemList;
 
     Vector layoutList = new Vector <LinearLayout>();
+    Vector textList = new Vector <TextView>();
 
     static Vector ObjectList = new Vector <Object>();
 
     static Vector copyObjectList = new Vector <Object>();
+
+    static int orderCount = 0;
+
+    TextView title;
+
+    LinearLayout borderBottom;
 
 
     @Override
@@ -57,12 +85,11 @@ public class Reservation extends BaseActivity {
         setContentView(getLayoutResource());
         initLayout();
 
-
         if (ObjectList.capacity() != 0) {
             for (int i = 0; i<ObjectList.size(); i++){
                 Object object = (Object) ObjectList.elementAt(i);
                 createReservation(object);
-                total += object.price;
+                total += object.price*object.count;
             }
         }
 
@@ -79,18 +106,25 @@ public class Reservation extends BaseActivity {
                     Toast.makeText(getApplicationContext(),"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show();
                     for (int i = 0; i<ObjectList.size();i++){
                         Object object = (Object) ObjectList.elementAt(i);
-                        payment(object.store, object.menuId, Integer.toString(object.price));
+                        payment(object.store, object.menuId, object.count, Integer.toString(object.price));
                     }
 
                     for(int i =0; i<layoutList.size(); i++){
                         LinearLayout ll = (LinearLayout)layoutList.elementAt(i);
                         ll.removeAllViews();
+                        ll.setVisibility(View.GONE);
+                    }
+
+                    for(int i = 0; i<textList.size();i++){
+                        TextView tv = (TextView)textList.elementAt(i);
+                        tv.setVisibility(View.GONE);
                     }
                     copyObjectList = (Vector)ObjectList.clone();
                     ObjectList.removeAllElements();
                     total = 0;
                     TextView resetTotal = (TextView) findViewById(R.id.total);
                     resetTotal.setText("0원");
+                    orderCount ++;
 
 
 
@@ -109,24 +143,42 @@ public class Reservation extends BaseActivity {
         //LinearLayout itemList;
         switch (obj.store){
             case 2:
+                title = (TextView) findViewById(R.id.storeTitle1) ;
+                borderBottom = (LinearLayout) findViewById(R.id.borderBottom2) ;
                 itemList = (LinearLayout) findViewById(R.id.itemList1);
+                textList.add(title);
+                layoutList.add(borderBottom);
                 layoutList.add(itemList);
                 break;
             case 3:
+                title = (TextView) findViewById(R.id.storeTitle2) ;
+                borderBottom = (LinearLayout) findViewById(R.id.borderBottom3) ;
                 itemList = (LinearLayout) findViewById(R.id.itemList2);
+                textList.add(title);
+                layoutList.add(borderBottom);
                 layoutList.add(itemList);
                 break;
             case 4:
+                title = (TextView) findViewById(R.id.storeTitle3) ;
+                borderBottom = (LinearLayout) findViewById(R.id.borderBottom4) ;
                 itemList = (LinearLayout) findViewById(R.id.itemList3);
+                textList.add(title);
+                layoutList.add(borderBottom);
                 layoutList.add(itemList);
                 break;
             case 5:
+                title = (TextView) findViewById(R.id.storeTitle4) ;
+                borderBottom = (LinearLayout) findViewById(R.id.borderBottom5) ;
                 itemList = (LinearLayout) findViewById(R.id.itemList4);
+                textList.add(title);
+                layoutList.add(borderBottom);
                 layoutList.add(itemList);
                 break;
             default:
                 itemList = null;
         }
+        title.setVisibility(View.VISIBLE);
+        borderBottom.setVisibility(View.VISIBLE);
 
         final LinearLayout content = new LinearLayout(this);
         //content.setOrientation(LinearLayout.HORIZONTAL);
@@ -154,7 +206,7 @@ public class Reservation extends BaseActivity {
         content.addView(view);
 
         TextView price = new TextView(this);
-        price.setText(Integer.toString(obj.price) + " 원");
+        price.setText(Integer.toString(obj.price*obj.count) + " 원");
         content.addView(price);
 
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
@@ -214,7 +266,7 @@ public class Reservation extends BaseActivity {
             public void onClick(View view) {
                 content.removeAllViews();
                 optionList.removeAllViews();
-                total -= element.price;
+                total -= element.price*element.count;
                 ObjectList.remove(element);
                 TextView reTotal = (TextView) findViewById(R.id.total);
                 reTotal.setText(Integer.toString(total) +"원");
@@ -223,16 +275,17 @@ public class Reservation extends BaseActivity {
 
     }
 
-    public void payment(int store, int menu, String price){
+    public void payment(int store, int menu, int count, String price){
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("bd2ba808.ngrok.io");
+        application.buildNetworkService("382b99e8.ngrok.io");
         //application.buildNetworkService("127.0.0.1", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
         HashMap<String, java.lang.Object> input = new HashMap<>();
         input.put("buyer", "maeng");
         input.put("menu", menu);
-        input.put("price", price);
+        input.put("count", count);
+        input.put("price", Integer.toString(Integer.parseInt(price)*count));
         //input.put("timer", "doing");
         networkService.post_stores(store, input).enqueue(new Callback<Menu>() {
             @Override

@@ -78,7 +78,7 @@ public class Fragment1  extends Fragment {
             // TODO Auto-generated method stub
 
                 ApplicationController application = ApplicationController.getInstance();
-                application.buildNetworkService("bd2ba808.ngrok.io");
+                application.buildNetworkService("382b99e8.ngrok.io");
                 //application.buildNetworkService("127.0.0.1", 8000);
                 networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -94,7 +94,7 @@ public class Fragment1  extends Fragment {
 
                                     listId.add(stores.getId());
                                     listName.add(stores.getName());
-                                    Object object = new Object(stores.getCreator(), stores.getName(), stores.getId(), Integer.parseInt(stores.getPrice()), stores.getTemperature());
+                                    Object object = new Object(stores.getCreator(), stores.getName(), stores.getId(), Integer.parseInt(stores.getPrice()), 0,"");
                                     listObject.add(object);
                                 }
                             }

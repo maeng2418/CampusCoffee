@@ -2,6 +2,7 @@ package com.example.campuscoffee;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,11 @@ public class OrderList extends BaseActivity {
     String s4 = "테크노큐브 카페\n";
 
     LinearLayout itemList;
-    Vector layoutList = new Vector <LinearLayout>();
+    TextView storeTitle;
+
+    //Vector layoutList = new Vector <LinearLayout>();
+
+    boolean on1, on2, on3, on4 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,7 @@ public class OrderList extends BaseActivity {
 
 
                 ApplicationController application = ApplicationController.getInstance();
-                application.buildNetworkService("bd2ba808.ngrok.io");
+                //application.buildNetworkService("382b99e8.ngrok.io");
                 //application.buildNetworkService("127.0.0.1", 8000);
                 networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -139,31 +144,36 @@ public class OrderList extends BaseActivity {
         switch(orders.getStore()){
             case 2:
                 itemList = (LinearLayout) findViewById(R.id.stateList1);
-                layoutList.add(itemList);
+                //layoutList.add(itemList);
                 break;
             case 3:
                 itemList = (LinearLayout) findViewById(R.id.stateList2);
-                layoutList.add(itemList);
+                //layoutList.add(itemList);
                 break;
             case 4:
                 itemList = (LinearLayout) findViewById(R.id.stateList3);
-                layoutList.add(itemList);
+                //layoutList.add(itemList);
                 break;
             case 5:
                 itemList = (LinearLayout) findViewById(R.id.stateList4);
-
-                layoutList.add(itemList);
+                //layoutList.add(itemList);
                 break;
         }
 
-        LinearLayout content = new LinearLayout(this);
+        final LinearLayout content = new LinearLayout(this);
+
+        LinearLayout.LayoutParams menuParam = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+
 
         TextView menu = new TextView(this);
         OrderMenu om = orders.getMenu();
         menu.setText(om.getName());
+        menuParam.leftMargin=20;
+        menu.setLayoutParams(menuParam);
         content.addView(menu);
-
-        View view = new View(this);
 
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -171,10 +181,17 @@ public class OrderList extends BaseActivity {
                 1f
         );
 
+        View view = new View(this);
+
         view.setMinimumWidth(0);
         view.setMinimumHeight(0);
         view.setLayoutParams(viewParams);
         content.addView(view);
+
+        TextView count = new TextView(this);
+        count.setText(Integer.toString(orders.getCount())+" 개"+"            ");
+        content.addView(count);
+
 
         TextView price = new TextView(this);
         price.setText(orders.getPrice() + " 원");
@@ -186,6 +203,7 @@ public class OrderList extends BaseActivity {
         );
 
         param.leftMargin = 40;
+        param.rightMargin = 20;
 
         Button stateBtn = new Button(this);
         stateBtn.setText(state);
@@ -194,9 +212,16 @@ public class OrderList extends BaseActivity {
         stateBtn.setLayoutParams(param);
 
         content.addView(stateBtn);
+
+        //content.setVisibility(View.GONE);
+
         itemList.addView(content);
 
-        LinearLayout borderLine = new LinearLayout(this);
+        if(state == "완료"){
+            stateBtn.setBackgroundColor(Color.parseColor("#c8c8c8"));
+        }
+
+        final LinearLayout borderLine = new LinearLayout(this);
 
         LinearLayout.LayoutParams borderLineParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -209,7 +234,59 @@ public class OrderList extends BaseActivity {
         borderLine.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         borderLine.setLayoutParams(borderLineParams);
 
+        //borderLine.setVisibility(View.GONE);
+
         itemList.addView(borderLine);
+
+        itemList.setVisibility(View.GONE);
+
+    }
+
+
+    public void onClick (View view) {
+        LinearLayout viewState;
+        switch (view.getId()) {
+            case R.id.storeTitle1 :
+                viewState = (LinearLayout) findViewById(R.id.stateList1);
+                if (on1 == false){
+                    viewState.setVisibility(View.VISIBLE);
+                    on1 = true;
+                }else{
+                    viewState.setVisibility(View.GONE);
+                    on1 = false;
+                }
+                break ;
+            case R.id.storeTitle2 :
+                viewState = (LinearLayout) findViewById(R.id.stateList2);
+                if (on2 == false){
+                    viewState.setVisibility(View.VISIBLE);
+                    on2 = true;
+                }else{
+                    viewState.setVisibility(View.GONE);
+                    on2 = false;
+                }
+                break ;
+            case R.id.storeTitle3 :
+                viewState = (LinearLayout) findViewById(R.id.stateList3);
+                if (on3 == false){
+                    viewState.setVisibility(View.VISIBLE);
+                    on3 = true;
+                }else{
+                    viewState.setVisibility(View.GONE);
+                    on3 = false;
+                }
+                break ;
+            case R.id.storeTitle4 :
+                viewState = (LinearLayout) findViewById(R.id.stateList4);
+                if (on4 == false){
+                    viewState.setVisibility(View.VISIBLE);
+                    on4 = true;
+                }else{
+                    viewState.setVisibility(View.GONE);
+                    on4 = false;
+                }
+                break ;
+        }
     }
 
     @Override
