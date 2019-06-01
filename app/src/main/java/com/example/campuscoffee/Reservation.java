@@ -106,7 +106,7 @@ public class Reservation extends BaseActivity {
                     Toast.makeText(getApplicationContext(),"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show();
                     for (int i = 0; i<ObjectList.size();i++){
                         Object object = (Object) ObjectList.elementAt(i);
-                        payment(object.store, object.menuId, object.count, Integer.toString(object.price));
+                        payment(object.store, object.menuId, object.count, Integer.toString(object.price), object.option);
                     }
 
                     for(int i =0; i<layoutList.size(); i++){
@@ -275,10 +275,10 @@ public class Reservation extends BaseActivity {
 
     }
 
-    public void payment(int store, int menu, int count, String price){
+    public void payment(int store, int menu, int count, String price, String option){
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("382b99e8.ngrok.io");
-        //application.buildNetworkService("127.0.0.1", 8000);
+        //application.buildNetworkService("382b99e8.ngrok.io");
+        application.buildNetworkService("13.125.246.124", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
         HashMap<String, java.lang.Object> input = new HashMap<>();
@@ -286,6 +286,7 @@ public class Reservation extends BaseActivity {
         input.put("menu", menu);
         input.put("count", count);
         input.put("price", Integer.toString(Integer.parseInt(price)*count));
+        input.put("option", option);
         //input.put("timer", "doing");
         networkService.post_stores(store, input).enqueue(new Callback<Menu>() {
             @Override

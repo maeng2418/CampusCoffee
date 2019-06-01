@@ -78,8 +78,8 @@ public class Fragment1  extends Fragment {
             // TODO Auto-generated method stub
 
                 ApplicationController application = ApplicationController.getInstance();
-                application.buildNetworkService("382b99e8.ngrok.io");
-                //application.buildNetworkService("127.0.0.1", 8000);
+                //application.buildNetworkService("382b99e8.ngrok.io");
+                application.buildNetworkService("13.125.246.124", 8000);
                 networkService = ApplicationController.getInstance().getNetworkService();
 
                 Call<List<Stores>> getCall = networkService.get_stores();
