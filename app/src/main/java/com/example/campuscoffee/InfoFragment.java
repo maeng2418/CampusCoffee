@@ -7,16 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Fragment2  extends Fragment {
+public class InfoFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         // xml 로 만들어준 프레그먼트를 자바 단에서 만들어줌
-        ViewGroup rootGroup =(ViewGroup)inflater.inflate(R.layout.activity_info, container,false);
+        ViewGroup rootGroup =(ViewGroup)inflater.inflate(R.layout.fragment_info, container,false);
         return  rootGroup;
-
     }
-
 }

@@ -2,13 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <!-- "Mark Favorite", should appear as action button if possible
-    <item
-        android:id="@+id/action_settings"
-        android:title="MY"
-        app:showAsAction="ifRoom"/>
-    -->
-    <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/point"
         android:title="포인트"
         app:showAsAction="never"/>
@@ -24,9 +17,4 @@
     <item android:id="@+id/cart"
         android:title="장바구니"
         app:showAsAction="never"/>
-
-    <item android:id="@+id/my_review"
-        android:title="리뷰관리"
-        app:showAsAction="never"/>
-
 </menu>

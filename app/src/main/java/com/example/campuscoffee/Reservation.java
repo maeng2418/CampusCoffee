@@ -2,65 +2,24 @@ package com.example.campuscoffee;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.campuscoffee.DTOs.Menu;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Vector;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.FieldMap;
-
-class Object {
-    int store;
-    String menu;
-    int menuId;
-    int price;
-    int count;
-
-    String option;
-
-
-
-    public Object(int store, String menu, int menuId, int price, int count, String option){
-        this.store = store;
-        this.menu = menu;
-        this.menuId = menuId;
-        this.price = price;
-        this.option = option;
-        this.count = count;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public String getOption() {
-        return option;
-    }
-
-    public void setOption(String option) {
-        this.option = option;
-    }
-}
 
 public class Reservation extends BaseActivity {
-
     private NetworkService networkService;
     int total = 0;
     LinearLayout itemList;
@@ -68,14 +27,11 @@ public class Reservation extends BaseActivity {
     Vector layoutList = new Vector <LinearLayout>();
     Vector textList = new Vector <TextView>();
 
-    static Vector ObjectList = new Vector <Object>();
-
-    static Vector copyObjectList = new Vector <Object>();
+    static Vector ObjectList = new Vector <com.example.campuscoffee.DTOs.Object>();
+    static Vector copyObjectList = new Vector <com.example.campuscoffee.DTOs.Object>();
 
     static int orderCount = 0;
-
     TextView title;
-
     LinearLayout borderBottom;
 
 
@@ -87,7 +43,7 @@ public class Reservation extends BaseActivity {
 
         if (ObjectList.capacity() != 0) {
             for (int i = 0; i<ObjectList.size(); i++){
-                Object object = (Object) ObjectList.elementAt(i);
+                com.example.campuscoffee.DTOs.Object object = (com.example.campuscoffee.DTOs.Object) ObjectList.elementAt(i);
                 createReservation(object);
                 total += object.price*object.count;
             }
@@ -105,8 +61,8 @@ public class Reservation extends BaseActivity {
                 {
                     Toast.makeText(getApplicationContext(),"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show();
                     for (int i = 0; i<ObjectList.size();i++){
-                        Object object = (Object) ObjectList.elementAt(i);
-                        payment(object.store, object.menuId, object.count, Integer.toString(object.price));
+                        com.example.campuscoffee.DTOs.Object object = (com.example.campuscoffee.DTOs.Object) ObjectList.elementAt(i);
+                        payment(object.store, object.menuId, object.count, Integer.toString(object.price), object.option);
                     }
 
                     for(int i =0; i<layoutList.size(); i++){
@@ -125,22 +81,15 @@ public class Reservation extends BaseActivity {
                     TextView resetTotal = (TextView) findViewById(R.id.total);
                     resetTotal.setText("0원");
                     orderCount ++;
-
-
-
-
                 }
                 else
                     Toast.makeText(getApplicationContext(),"장바구니가 비어있습니다..",Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
-//
-    public void createReservation (Object obj){
-        final Object  element = obj;
-        //LinearLayout itemList;
+
+    public void createReservation (com.example.campuscoffee.DTOs.Object obj){
+        final com.example.campuscoffee.DTOs.Object element = obj;
         switch (obj.store){
             case 2:
                 title = (TextView) findViewById(R.id.storeTitle1) ;
@@ -181,7 +130,6 @@ public class Reservation extends BaseActivity {
         borderBottom.setVisibility(View.VISIBLE);
 
         final LinearLayout content = new LinearLayout(this);
-        //content.setOrientation(LinearLayout.HORIZONTAL);
 
         LinearLayout.LayoutParams contentParam = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -222,8 +170,6 @@ public class Reservation extends BaseActivity {
         delete.setTextColor(getResources().getColor(R.color.colorAccent));
         delete.setBackground(getResources().getDrawable(R.drawable.border));
         delete.setLayoutParams(param);
-
-
 
         content.addView(delete);
 
@@ -275,10 +221,9 @@ public class Reservation extends BaseActivity {
 
     }
 
-    public void payment(int store, int menu, int count, String price){
+    public void payment(int store, int menu, int count, String price, String option){
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("382b99e8.ngrok.io");
-        //application.buildNetworkService("127.0.0.1", 8000);
+        application.buildNetworkService("13.125.246.124", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
         HashMap<String, java.lang.Object> input = new HashMap<>();
@@ -286,7 +231,7 @@ public class Reservation extends BaseActivity {
         input.put("menu", menu);
         input.put("count", count);
         input.put("price", Integer.toString(Integer.parseInt(price)*count));
-        //input.put("timer", "doing");
+        input.put("option", option);
         networkService.post_stores(store, input).enqueue(new Callback<Menu>() {
             @Override
             public void onResponse(Call<Menu> call, Response<Menu> response) {
@@ -301,14 +246,12 @@ public class Reservation extends BaseActivity {
                         Log.d("data.getStore()", menuList.getStore() + "");
                         Log.d("data.getMenu()", menuList.getMenu() + "");
                         Log.e("postData end", "======================================");
-
                     }
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Menu> call, @NonNull Throwable t) {
-
             }
         });
     }
@@ -317,5 +260,4 @@ public class Reservation extends BaseActivity {
     protected int getLayoutResource() {
         return R.layout.activity_reservation;
     }
-
 }

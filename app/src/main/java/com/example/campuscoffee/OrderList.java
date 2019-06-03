@@ -1,11 +1,9 @@
 package com.example.campuscoffee;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +11,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
+import com.example.campuscoffee.DTOs.Order;
+import com.example.campuscoffee.DTOs.OrderMenu;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.List;
-import java.util.Vector;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,22 +22,11 @@ import retrofit2.Response;
 
 public class OrderList extends BaseActivity {
 
-    //public final String TAG = "KJH";
     private NetworkService networkService;
-    //ProgressDialog dialog;
-    //Vector bought = new Vector ();
-
-    String s1 = "제1학생회관 카페\n";
-    String s2 = "제2학생회관 카페\n";
-    String s3 = "도서관 카페\n";
-    String s4 = "테크노큐브 카페\n";
 
     LinearLayout itemList;
-    TextView storeTitle;
 
-    //Vector layoutList = new Vector <LinearLayout>();
-
-    boolean on1, on2, on3, on4 = false;
+    boolean isVisible1hak, isVisible2hak, isVisibleLibrary, isVisibleCube = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +37,15 @@ public class OrderList extends BaseActivity {
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
 
-        //dialog = new ProgressDialog(OrderList.this);
         NetworkTask mProcessTask = new NetworkTask();
-
         mProcessTask.execute();
-
-
     }
 
     private class NetworkTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
-            //dialog.setMessage("잠시만 기다려주세요");
-            //dialog.show();
         }
 
         @Override
@@ -78,17 +54,8 @@ public class OrderList extends BaseActivity {
 
             String buyer = "maeng";
 
-            /*
-            for(int i=0; i<Reservation.copyObjectList.size();i++) {
-                Object obj = (Object) Reservation.copyObjectList.elementAt(i);
-                int store = obj.store;
-            }
-            */
-
-
                 ApplicationController application = ApplicationController.getInstance();
-                //application.buildNetworkService("382b99e8.ngrok.io");
-                //application.buildNetworkService("127.0.0.1", 8000);
+                application.buildNetworkService("13.125.246.124", 8000);
                 networkService = ApplicationController.getInstance().getNetworkService();
 
                 Call<List<Order>> getCall = networkService.get_timer(buyer);
@@ -98,10 +65,7 @@ public class OrderList extends BaseActivity {
                         if( response.isSuccessful()) {
                             List<Order> orderList = response.body();
 
-                            //TextView textView = (TextView) findViewById(R.id.textView) ;
-
                             for(Order orders : orderList){
-
                                 //조리중 : 2 완료 : 3
                                 if (orders.getProgress() == 1){
                                     createOrderList(orders, "조리중");
@@ -111,7 +75,6 @@ public class OrderList extends BaseActivity {
                                     createOrderList(orders, "접수중");
                                 }
                             }
-
 
                         } else {
                             int StatusCode = response.code();
@@ -125,7 +88,6 @@ public class OrderList extends BaseActivity {
                     }
                 });
 
-
             return null;
         }
 
@@ -133,30 +95,22 @@ public class OrderList extends BaseActivity {
         protected void onPostExecute(Void result) {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
-            //dialog.dismiss();
-
         }
-
-
     }
 
     public void createOrderList(Order orders, String state){
         switch(orders.getStore()){
             case 2:
                 itemList = (LinearLayout) findViewById(R.id.stateList1);
-                //layoutList.add(itemList);
                 break;
             case 3:
                 itemList = (LinearLayout) findViewById(R.id.stateList2);
-                //layoutList.add(itemList);
                 break;
             case 4:
                 itemList = (LinearLayout) findViewById(R.id.stateList3);
-                //layoutList.add(itemList);
                 break;
             case 5:
                 itemList = (LinearLayout) findViewById(R.id.stateList4);
-                //layoutList.add(itemList);
                 break;
         }
 
@@ -166,7 +120,6 @@ public class OrderList extends BaseActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-
 
         TextView menu = new TextView(this);
         OrderMenu om = orders.getMenu();
@@ -192,7 +145,6 @@ public class OrderList extends BaseActivity {
         count.setText(Integer.toString(orders.getCount())+" 개"+"            ");
         content.addView(count);
 
-
         TextView price = new TextView(this);
         price.setText(orders.getPrice() + " 원");
         content.addView(price);
@@ -213,8 +165,6 @@ public class OrderList extends BaseActivity {
 
         content.addView(stateBtn);
 
-        //content.setVisibility(View.GONE);
-
         itemList.addView(content);
 
         if(state == "완료"){
@@ -234,56 +184,53 @@ public class OrderList extends BaseActivity {
         borderLine.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         borderLine.setLayoutParams(borderLineParams);
 
-        //borderLine.setVisibility(View.GONE);
-
         itemList.addView(borderLine);
 
         itemList.setVisibility(View.GONE);
 
     }
 
-
     public void onClick (View view) {
         LinearLayout viewState;
         switch (view.getId()) {
             case R.id.storeTitle1 :
                 viewState = (LinearLayout) findViewById(R.id.stateList1);
-                if (on1 == false){
+                if (isVisible1hak == false){
                     viewState.setVisibility(View.VISIBLE);
-                    on1 = true;
+                    isVisible1hak = true;
                 }else{
                     viewState.setVisibility(View.GONE);
-                    on1 = false;
+                    isVisible1hak = false;
                 }
                 break ;
             case R.id.storeTitle2 :
                 viewState = (LinearLayout) findViewById(R.id.stateList2);
-                if (on2 == false){
+                if (isVisible2hak == false){
                     viewState.setVisibility(View.VISIBLE);
-                    on2 = true;
+                    isVisible2hak = true;
                 }else{
                     viewState.setVisibility(View.GONE);
-                    on2 = false;
+                    isVisible2hak = false;
                 }
                 break ;
             case R.id.storeTitle3 :
                 viewState = (LinearLayout) findViewById(R.id.stateList3);
-                if (on3 == false){
+                if (isVisibleLibrary == false){
                     viewState.setVisibility(View.VISIBLE);
-                    on3 = true;
+                    isVisibleLibrary = true;
                 }else{
                     viewState.setVisibility(View.GONE);
-                    on3 = false;
+                    isVisibleLibrary = false;
                 }
                 break ;
             case R.id.storeTitle4 :
                 viewState = (LinearLayout) findViewById(R.id.stateList4);
-                if (on4 == false){
+                if (isVisibleCube == false){
                     viewState.setVisibility(View.VISIBLE);
-                    on4 = true;
+                    isVisibleCube = true;
                 }else{
                     viewState.setVisibility(View.GONE);
-                    on4 = false;
+                    isVisibleCube = false;
                 }
                 break ;
         }

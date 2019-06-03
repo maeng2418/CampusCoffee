@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SubActivity"/>
+        <activity android:name=".CafeActivity"/>
         <activity android:name=".Reservation"/>
         <activity android:name=".OrderList"/>
         <activity android:name=".LoadingActivity"/>

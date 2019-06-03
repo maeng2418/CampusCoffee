@@ -41,19 +41,4 @@ public class ApplicationController extends Application {
         }
     }
 
-    public void buildNetworkService(String ip){
-        synchronized (ApplicationController.class){
-            if (networkService == null){
-                baseUrl = String.format("http://%s/", ip);
-                Log.i(TAG, baseUrl);
-
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(baseUrl)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                networkService = retrofit.create(NetworkService.class);
-            }
-        }
-    }
 }

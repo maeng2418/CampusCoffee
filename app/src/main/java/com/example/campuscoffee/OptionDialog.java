@@ -4,28 +4,21 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Vector;
-
 public class OptionDialog extends Dialog implements View.OnClickListener {
-    private static final int LAYOUT = R.layout.activity_option;
+    private static final int LAYOUT = R.layout.dialog_option;
 
     private Context context;
-    private Object object;
+    private com.example.campuscoffee.DTOs.Object object;
 
     private TextView cancel;
     private TextView ok;
-    private TextView count1;
-    private TextView count2;
     private TextView quantity;
     private TextView shot;
     private CheckBox hazelnutSyrup;
@@ -37,8 +30,6 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
     private Button plusQuantity;
     private Button minusQuantity;
 
-    private String name;
-
     static int quantityValue = 1;
     static int shotValue = 0;
     static String syrups = "";
@@ -46,7 +37,7 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
 
     static int cartCount = 0;
 
-    public OptionDialog(@NonNull Context context, Object object) {
+    public OptionDialog(@NonNull Context context, com.example.campuscoffee.DTOs.Object object) {
         super(context);
         this.context = context;
         this.object = object;
@@ -91,6 +82,10 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        quantityValue = 1;
+        shotValue = 0;
+        syrups = "";
+        temperature = "";
 
         switch (v.getId()){
             case R.id.plusQuantity:
@@ -117,12 +112,12 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
                 cancel();
                 break;
             case R.id.ok:
+                //parse user select option
                 syrups = hazelnutSyrup.isChecked()? syrups+"헤이즐넛 ":syrups;
                 syrups = vanillaSyrup.isChecked()? syrups+"바닐라 ":syrups;
                 syrups = chocoSyrup.isChecked()? syrups+"초코":syrups;
                 temperature = selectTemperature.getCheckedRadioButtonId() == R.id.hot? "HOT": "ICE";
 
-                //Toast.makeText(getContext(),"장바구니에 담았습니다..",Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),
                         Integer.toString(quantityValue)+"개, "+
                                 temperature+", 샷 추가: "+Integer.toString(shotValue)+"회, "
@@ -135,10 +130,8 @@ public class OptionDialog extends Dialog implements View.OnClickListener {
                         +"/ "+ temperature
                         +"/ 샷 추가 : "+Integer.toString(shotValue)
                         +"/ 시럽 : "+syrups);
-                quantityValue = 1;
-                shotValue = 1;
-                syrups = "";
-                temperature = "";
+
+                //add order object in reservation
                 Reservation.ObjectList.add(object);
 
                 break;
