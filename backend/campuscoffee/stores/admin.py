@@ -13,7 +13,6 @@ class MenuAdmin(admin.ModelAdmin):
         'creator',
         'file',
         'name',
-        'temperature',
         'price',
     )
 

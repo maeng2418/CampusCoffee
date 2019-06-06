@@ -13,15 +13,17 @@ class TimeStampedModel(models.Model):
 
 class Menu(TimeStampedModel):
 
-    """ Menu Model """
-    TEMPERATURE_CHOICES = (
-        ("hot", "Hot"),
-        ("ice", "Ice")
-    )
+    '''
+        """ Menu Model """
+        TEMPERATURE_CHOICES = (
+            ("hot", "Hot"),
+            ("ice", "Ice")
+        )
+    '''
     file = models.ImageField()
     name = models.TextField()
     creator = models.ForeignKey(user_models.User, null=True, on_delete=models.CASCADE)
-    temperature = models.CharField(null=True, max_length=80, choices = TEMPERATURE_CHOICES)
+    #temperature = models.CharField(null=True, max_length=80, choices = TEMPERATURE_CHOICES)
     price = models.CharField(null=True, max_length=50)
 
     @property
