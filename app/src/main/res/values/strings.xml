@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CampusCoffee</string>
+    // 페이스북 앱 키
+    <string name="facebook_app_key">475023546371780</string>
 </resources>

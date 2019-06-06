@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,7 @@ public class Fragment1  extends Fragment {
                 btn = new Button(getActivity());
                 btn.setId(i);
                 btn.setText((String)listName.elementAt(i));
+                btn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.menu_item));
                 ll.addView(btn);
                 btn.setOnClickListener(new Button.OnClickListener(){
                     @Override
@@ -103,6 +105,7 @@ public class Fragment1  extends Fragment {
                                 btn = new Button(getActivity());
                                 btn.setId(i);
                                 btn.setText((String)listName.elementAt(i));
+                                btn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.menu_item));
                                 ll.addView(btn);
 
                                 btn.setOnClickListener(new Button.OnClickListener(){

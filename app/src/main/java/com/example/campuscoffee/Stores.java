@@ -1,14 +1,14 @@
 package com.example.campuscoffee;
 
 public class Stores {
-    public int id;
-    public String created_at;
-    public String updated_at;
-    public String file;
-    public String name;
-    public String temperature;
-    public String price;
-    public int creator;
+    private int id;
+    private String created_at;
+    private String updated_at;
+    private String file;
+    private String name;
+    private String temperature;
+    private String price;
+    private int creator;
 
     public int getId() {
         return id;

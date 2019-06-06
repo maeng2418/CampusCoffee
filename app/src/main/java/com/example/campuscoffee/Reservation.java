@@ -28,7 +28,6 @@ class Object {
     int menuId;
     int price;
     int count;
-
     String option;
 
 

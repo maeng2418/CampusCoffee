@@ -68,8 +68,6 @@ public class OrderList extends BaseActivity {
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
-            //dialog.setMessage("잠시만 기다려주세요");
-            //dialog.show();
         }
 
         @Override

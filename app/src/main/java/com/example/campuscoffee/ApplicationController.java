@@ -5,12 +5,9 @@ import android.util.Log;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by KJH on 2017-06-06.
- */
 
 public class ApplicationController extends Application {
-    public final static String TAG = "KJH";
+    public final static String TAG = "KMS";
     private static ApplicationController instance;
     public static ApplicationController getInstance(){return instance;}
 

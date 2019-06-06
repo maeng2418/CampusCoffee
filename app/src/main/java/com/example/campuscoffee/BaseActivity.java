@@ -23,16 +23,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Get the ActionBar here to configure the way it behaves.
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true); // 왼쪽에 버튼 만들기
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.home); //왼쪽 버튼을 본인이 만든 아이콘으로 하기 위해 필요
-        */
     }
 
     protected void initLayout() {
