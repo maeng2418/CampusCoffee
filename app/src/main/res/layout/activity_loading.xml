@@ -9,8 +9,8 @@
         android:layout_centerInParent="true"
         android:gravity="center">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:src="@drawable/coffee_icon"
             android:id="@+id/coffeeIcon"
             />
@@ -20,6 +20,7 @@
             android:layout_centerHorizontal="true"
             android:text="불러오는 중.."
             android:textColor="@color/colorAccent"
+            android:layout_marginTop="30dp"
             android:textSize="40dp"/>
     </LinearLayout>
 </RelativeLayout>
